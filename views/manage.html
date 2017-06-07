@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Socket.io - Simple chat</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+    <div id="content">
+        <div class="btn btn-one">
+            改变1号屏幕
+        </div>
+    </div>
+</body>
+
+<script src="javascripts/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('.btn-one').on('click', function () {
+
+            $.ajax({
+                url: '/manage/change',
+                type: 'post',
+                data: {
+                    n: 'one'
+                },
+                success: function (res) {
+                    console.log(res)
+                }
+            });
+
+        });
+
+    });
+</script>
+
+</html>
