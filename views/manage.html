@@ -11,6 +11,10 @@
             改变1号屏幕
         </div>
     </div>
+    <input type="file" name="file" id="file">
+    <button id="upload" >提交</button>
+    <p id="result"></p>
+    <img id='img' src="">
 </body>
 
 <script src="javascripts/jquery.min.js"></script>
@@ -29,8 +33,33 @@
                     console.log(res)
                 }
             });
-
+     });
+        $('#upload').on('click',function(){
+            $('#result').html("??");
+            var file = document.getElementById('file');
+            var formData = new FormData();
+            formData.append('file',file.files[0]);
+            $.ajax({
+                url:'/upload',
+                type:'POST',
+                data:formData,
+                cache:false,
+                contentType:false,
+                processData:false,
+                success:function(data){
+                if(200 === data.code){
+                    $('#result').html("上传成功");
+                    $('#img').attr('src',data.data);
+                }else{
+                    $('#result').html("与服务器通信发生错误");
+                }
+            },
+            error:function(){
+                $('#result').html("errer");
+            }
         });
+    });
+
 
     });
 </script>
